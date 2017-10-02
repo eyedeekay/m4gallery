@@ -1,0 +1,39 @@
+#! /usr/bin/env sh
+#konvert-all
+mkdir -p db
+
+reindex_page(){
+        file="$1"
+        m4page -f "$file" -p
+        metavars "$file" > "$file.sh"
+        . "$file.sh"; title=$(echo "$Title" | tr " " "_")
+        if [ ! -f contents.md ]; then touch contents.md; fi
+        if [ ! "$(grep "$Title" contents.md)" ]; then
+        if [ ! "$(grep "$Season" contents.md)" ]; then
+        if [ ! "$(grep "$Episode" contents.md)" ]; then
+        if [ ! "$(grep "$Description" contents.md)" ]; then
+                echo " * **[$Title]($file.html)**" | tee -a contents.md
+                echo "  * *Season* $Season, *Episode* $Episode" | tee -a contents.md
+                echo "  * Genre: $Genre : $Description" | tee -a contents.md
+                echo "  * *$Director .$Date*" | tee -a contents.md
+        fi
+        fi
+        fi
+        fi
+        mv "$file.sh" "db/$title.sh"
+}
+
+emit_index(){
+        toc="$1"
+        hdpage -p -t "$toc" > contents.html
+        echo "  <body>" >> contents.html
+        markdown contents.md >> contents.html
+        echo "  </body>" >> contents.html
+        echo "</html>" >> contents.html
+}
+
+for file in $(find -name *.mp4); do
+        reindex_page "$file"
+done
+
+emit_index "Table_of_Contents"
