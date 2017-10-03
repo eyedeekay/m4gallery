@@ -60,6 +60,7 @@ emit_index(){
         echo "  </div>" >> contents.html
         echo "  <div id=\"sidebar\">" >> contents.html
         echo "   <input type=\"text\" id=\"input\">" >> contents.html
+        markdown README.md >> contents.html
         echo "  </div>" >> contents.html
         echo "" >> contents.html
         markdown contents.md >> contents.html
