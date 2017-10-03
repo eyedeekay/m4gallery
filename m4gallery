@@ -22,7 +22,7 @@ reindex_page(){
         file="$1"
         m4page -f "$file" -p -d "$db_dir"
         metavars "$file" > "$db_dir/$file.sh"
-        export name=$(basename "$file")
+        export name=$(basename $file)
         . "$file.sh";
         if [ ! -f contents.md ]; then touch contents.md; fi
         if [ ! "$(grep "$Title" contents.md)" ]; then
@@ -66,7 +66,6 @@ emit_index(){
         markdown contents.md >> contents.html
         echo "  </body>" >> contents.html
         echo "</html>" >> contents.html
-        echo $name
 }
 
 for file in $(find -name *.mp4); do
