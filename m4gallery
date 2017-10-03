@@ -16,7 +16,7 @@ if [ -z "$1" ]; then
         fi
 fi
 
-mkdir -p db
+mkdir -p "$db_dir"
 
 reindex_page(){
         file="$1"
@@ -26,36 +26,27 @@ reindex_page(){
         metavars "$file" > "$db_dir/$name.sh"
         . "$db_dir/$name.sh";
         if [ ! -f contents.md ]; then touch contents.md; fi
-        if [ ! "$(grep "$Title" contents.md)" ]; then
-        if [ ! "$(grep "$Season" contents.md)" ]; then
-        if [ ! "$(grep "$Episode" contents.md)" ]; then
-        if [ ! "$(grep "$Description" contents.md)" ]; then
-                echo " * **[$Title]($file.html)**" | tee -a contents.md
-                echo "  * *Season* $Season, *Episode* $Episode" | tee -a contents.md
-                echo "  * Genre: $Genre : $Description" | tee -a contents.md
-                echo "  * *$Director .$Date*" | tee -a contents.md
+        if [ ! "$(grep -C 1 "$Title" contents.md | \
+                grep "$Season" | \
+                grep "$Episode")" ]; then
+                        echo " * **[$Title]($file.html)**" | tee -a contents.md
+                        echo "  * *Season* $Season, *Episode* $Episode" | tee -a contents.md
+                        echo "  * Genre: $Genre : $Description" | tee -a contents.md
+                        echo "  * *$Director .$Date*" | tee -a contents.md
         fi
-        fi
-        fi
-        fi
-        #mv "$file.sh" "$db_dir/$name.sh"
 }
 
 regenerate_contents(){
         for file in $(find "$db_dir" -name *.sh); do
                 . "$file";
                 if [ ! -f contents.md ]; then touch contents.md; fi
-                if [ ! "$(grep "$Title" contents.md)" ]; then
-                if [ ! "$(grep "$Season" contents.md)" ]; then
-                if [ ! "$(grep "$Episode" contents.md)" ]; then
-                if [ ! "$(grep "$Description" contents.md)" ]; then
-                        echo " * **[$Title]($file.html)**" | tee -a contents.md
-                        echo "  * *Season* $Season, *Episode* $Episode" | tee -a contents.md
-                        echo "  * Genre: $Genre : $Description" | tee -a contents.md
-                        echo "  * *$Director .$Date*" | tee -a contents.md
-                fi
-                fi
-                fi
+                if [ ! "$(grep "$Title" contents.md | \
+                        grep "$Season" | \
+                        grep "$Episode")" ]; then
+                                echo " * **[$Title]($file.html)**" | tee -a contents.md
+                                echo "  * *Season* $Season, *Episode* $Episode" | tee -a contents.md
+                                echo "  * Genre: $Genre : $Description" | tee -a contents.md
+                                echo "  * *$Director .$Date*" | tee -a contents.md
                 fi
         done
 }
