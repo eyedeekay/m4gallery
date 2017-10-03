@@ -59,6 +59,7 @@ emit_index(){
         echo "# Notflix" | markdown >> contents.html
         echo "  </div>" >> contents.html
         echo "  <div id=\"input\">" >> contents.html
+        echo "   input test" >> contents.html
         echo "  </div>" >> contents.html
         echo "" >> contents.html
         markdown contents.md >> contents.html
