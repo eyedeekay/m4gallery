@@ -66,6 +66,7 @@ emit_index(){
         markdown contents.md >> contents.html
         echo "  </body>" >> contents.html
         echo "</html>" >> contents.html
+        echo $name
 }
 
 for file in $(find -name *.mp4); do
