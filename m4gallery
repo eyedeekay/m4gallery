@@ -37,7 +37,7 @@ reindex_page(){
         fi
         fi
         fi
-        mv "$file.sh" "$db_dir/$title.sh"
+        mv "$file.sh" "$db_dir/$name.sh"
 }
 
 regenerate_contents(){
