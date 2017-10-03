@@ -37,7 +37,7 @@ reindex_page(){
 }
 
 regenerate_contents(){
-        for file in $(find "$db_dir" -name *.sh); do
+        for file in $(find "$db_dir" -n -name *.sh); do
                 . "$file";
                 if [ ! -f contents.md ]; then touch contents.md; fi
                 if [ ! "$(grep "$Title" contents.md | \
