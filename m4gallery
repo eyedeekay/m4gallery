@@ -21,8 +21,9 @@ mkdir -p db
 reindex_page(){
         file="$1"
         m4page -f "$file" -p -d "$db_dir"
-        metavars "$file" > "$db_dir/$file.sh"
         export name=$(basename $file)
+        echo "basename $name"
+        metavars "$file" > "$db_dir/$name.sh"
         . "$file.sh";
         if [ ! -f contents.md ]; then touch contents.md; fi
         if [ ! "$(grep "$Title" contents.md)" ]; then
