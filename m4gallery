@@ -64,7 +64,7 @@ emit_index(){
         echo "</html>" >> contents.html
 }
 
-for file in $(find -name *.mp4); do
+for file in $(find -name *.mp4 | sort); do
         reindex_page "$file"
 done
 
