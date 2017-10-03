@@ -55,9 +55,9 @@ emit_index(){
         toc="$1"
         hdpage -p -t "$toc" > contents.html
         echo "  <body>" >> contents.html
-        echo "  <header>" >> contents.html
+        echo "  <div id=\"header\">" >> contents.html
         echo "# Notflix" | markdown >> contents.html
-        echo "  </header>" >> contents.html
+        echo "  </div>" >> contents.html
         echo "" >> contents.html
         markdown contents.md >> contents.html
         echo "  </body>" >> contents.html
