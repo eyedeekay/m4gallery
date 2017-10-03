@@ -29,7 +29,7 @@ reindex_page(){
         if [ ! "$(grep -C 1 "$Title" contents.md | \
                 grep "$Season" | \
                 grep "$Episode")" ]; then
-                        echo " * **[$Title]($db_dir/$name.html)**" | tee -a contents.md
+                        echo " 1. **[$Title]($db_dir/$name.html)**" | tee -a contents.md
                         echo "  * *Season* $Season, *Episode* $Episode" | tee -a contents.md
                         echo "  * Genre: $Genre : $Description" | tee -a contents.md
                         echo "  * *$Director .$Date*" | tee -a contents.md
@@ -43,7 +43,7 @@ regenerate_contents(){
                 if [ ! "$(grep "$Title" contents.md | \
                         grep "$Season" | \
                         grep "$Episode")" ]; then
-                                echo " * **[$Title]($db_dir/$name.html)**" | tee -a contents.md
+                                echo " 1. **[$Title]($db_dir/$name.html)**" | tee -a contents.md
                                 echo "  * *Season* $Season, *Episode* $Episode" | tee -a contents.md
                                 echo "  * Genre: $Genre : $Description" | tee -a contents.md
                                 echo "  * *$Director .$Date*" | tee -a contents.md
