@@ -61,6 +61,7 @@ emit_index(){
         echo "  <input type=\"text\" id=\"input\">" >> contents.html
         echo "" >> contents.html
         markdown contents.md >> contents.html
+        echo "<script src=\"search.js\"></script>" >> contents.html
         echo "  </body>" >> contents.html
         echo "</html>" >> contents.html
 }
