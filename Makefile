@@ -2,4 +2,4 @@
 none:
 
 install:
-	m4gallery /usr/local/bin
+	install m4gallery /usr/local/bin
