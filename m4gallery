@@ -24,7 +24,7 @@ reindex_page(){
         export name=$(basename $file)
         echo "basename $name"
         metavars "$file" > "$db_dir/$name.sh"
-        . "$file.sh";
+        . "$db_dir/$name.sh";
         if [ ! -f contents.md ]; then touch contents.md; fi
         if [ ! "$(grep "$Title" contents.md)" ]; then
         if [ ! "$(grep "$Season" contents.md)" ]; then
