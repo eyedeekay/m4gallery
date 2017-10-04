@@ -22,7 +22,6 @@ reindex_page(){
         file="$1"
         m4page -f "$file" -p -d "$db_dir" -n "../"
         export name=$(basename $file)
-        echo "basename $name"
         metavars "$file" > "$db_dir/$name.sh"
         unset Title Season Episode Genre Description Director Date
         . "$db_dir/$name.sh";
